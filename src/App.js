@@ -1941,8 +1941,7 @@ const initialMonthsList = [
       {
         id: "17b7b1a7-09ad-4f13-b5e8-5d992bf2819b",
         date: "01",
-        emojiUrl:
-          "https://assets.ccbp.in/frontend/react-js/monthly-emojis/monthly-emojis-very-happy.png",
+        emojiUrl: "",
         emojiName: "",
       },
       {
