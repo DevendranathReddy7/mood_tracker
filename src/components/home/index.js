@@ -10,6 +10,8 @@ import {
   Li,
   Day,
   SmallEmoji,
+  LargeEmoji,
+  EmojiCard,
 } from "./styles";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
@@ -30,7 +32,10 @@ class Home extends Component {
   ];
   state = {
     currentMonth: "",
+    activeEmoji: "380e6284-a454-11ec-b909-0242ac120002",
+    activeDay: "",
   };
+
   componentDidMount() {
     this.getCurMonth();
   }
@@ -91,6 +96,63 @@ class Home extends Component {
     );
   };
 
+  setActiveEmoji = (id) => {
+    this.setState({ activeEmoji: id });
+  };
+
+  getMoodEmojis = () => {
+    const { emojisList } = this.props;
+    const { activeEmoji } = this.state;
+    return (
+      <EmojiConatiner>
+        {emojisList.map((emoji) => (
+          <EmojiCard>
+            {emoji.emojiName}
+            <LargeEmoji
+              active={emoji.id === activeEmoji}
+              src={emoji.emojiUrl}
+              alt={emoji.emojiName}
+              onClick={() => this.setActiveEmoji(emoji.id)}
+            />
+          </EmojiCard>
+        ))}
+      </EmojiConatiner>
+    );
+  };
+
+  handleactiveEmoji = (e) => {
+    const { emojisList } = this.props;
+    const emoji = emojisList.filter(
+      (emoji) => emoji.emojiName === e.target.value
+    );
+    this.setState({ activeEmoji: emoji[0].id });
+  };
+
+  handleDayChange = (e) => {
+    const { daysList } = this.props;
+    const day = daysList.filter((day) => day.day === e.target.value);
+    this.setState({ activeDay: day[0].day });
+  };
+
+  getDropDowns = () => {
+    const { emojisList, daysList } = this.props;
+    return (
+      <DayConatiner>
+        <select onChange={this.handleactiveEmoji}>
+          {emojisList.map((emoji) => (
+            <option value={emoji.emojiName}>{emoji.emojiName}</option>
+          ))}
+        </select>
+
+        <select onChange={this.handleDayChange}>
+          {daysList.map((day) => (
+            <option value={day.day}>{day.day}</option>
+          ))}
+        </select>
+      </DayConatiner>
+    );
+  };
+
   render() {
     const { currentMonth } = this.state;
     return (
@@ -100,8 +162,8 @@ class Home extends Component {
           {this.getCalender(currentMonth)}
 
           <ChildContainer>
-            <EmojiConatiner></EmojiConatiner>
-            <DayConatiner></DayConatiner>
+            {this.getMoodEmojis()}
+            {this.getDropDowns()}
           </ChildContainer>
         </MainHomeConatiner>
       </>

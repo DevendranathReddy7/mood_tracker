@@ -40,8 +40,38 @@ export const Day = styled.div`
 export const SmallEmoji = styled.img`
   width: 15px;
 `;
-export const ChildContainer = styled.div``;
 
-export const EmojiConatiner = styled.div``;
+export const ChildContainer = styled.div`
+  width: 30%;
+  margin-left: 50px;
+`;
 
-export const DayConatiner = styled.div``;
+export const EmojiConatiner = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  background-color: lightgrey;
+  align-items: center;
+  padding: 30px 10px;
+  border-radius: 3px;
+`;
+
+export const EmojiCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const LargeEmoji = styled.img`
+  width: ${(props) => (props.active ? "30px" : "20px")};
+`;
+
+export const DayConatiner = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  background-color: lightgrey;
+  align-items: center;
+  padding: 10px 10px 82px 10px;
+  border-radius: 3px;
+  margin-top: 8px;
+`;
