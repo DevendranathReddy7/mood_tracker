@@ -84,7 +84,7 @@ class Home extends Component {
   };
 
   handleActiveDate = (day) => {
-    const { emojisList } = this.props;
+    const { emojisList, updateCount } = this.props;
     const { activeEmoji, currentMonth, initialMonthsList } = this.state;
 
     const emojiObj = emojisList.find((emoji) => emoji.id === activeEmoji);
@@ -100,6 +100,7 @@ class Home extends Component {
     selectedDate.emojiName = emojiObj.emojiName;
 
     this.setState({ activeDate: day.date });
+    updateCount(initialMonthsList);
   };
 
   getCalender = (currentMonth) => {
@@ -116,7 +117,9 @@ class Home extends Component {
         <CalenderBody>
           {daysList.map((day) => (
             <Li key={day.id}>
-              <Day role="none">{day.day}</Day>
+              <Day role="none" day>
+                {day.day}
+              </Day>
             </Li>
           ))}
 
@@ -167,14 +170,12 @@ class Home extends Component {
     const { activeFilterEmoji, activeFilterDay, initialMonthsList } =
       this.state;
     const { daysList } = this.props;
-    console.log(activeFilterDay, activeFilterEmoji);
 
     const filterbyMood = initialMonthsList.flatMap((eachMonth) =>
       eachMonth.dates.filter(
         (eachDate) => eachDate.emojiName === activeFilterEmoji
       )
     );
-
     this.setState({ count: filterbyMood.length });
   };
 

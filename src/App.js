@@ -2,6 +2,8 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/home";
 import Navbar from "./components/Navbar";
+import Reports from "./components/reports";
+import { useState } from "react";
 
 // #region - Use these lists in your code.
 
@@ -2350,6 +2352,11 @@ const emojisList = [
 // #endregion
 
 function App() {
+  const [updatedMonths, setUpdatedMonths] = useState();
+
+  const countHandler = (monthslist) => {
+    setUpdatedMonths(monthslist);
+  };
   return (
     <BrowserRouter>
       <Navbar />
@@ -2361,7 +2368,14 @@ function App() {
               daysList={daysList}
               emojisList={emojisList}
               initialMonthsList={initialMonthsList}
+              updateCount={countHandler}
             />
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <Reports emojisList={emojisList} updatedMonths={updatedMonths} />
           }
         />
       </Routes>

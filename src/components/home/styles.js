@@ -43,7 +43,7 @@ export const Li = styled.li`
 export const Day = styled.div`
   text-align: center;
   border-radius: 5px;
-  background-color: #1c1a28;
+  background-color: ${(props) => (props.day ? "transparent" : "#1c1a28")};
   padding: 3px 0px;
   align-items: center;
 `;
