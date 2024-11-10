@@ -8,6 +8,10 @@ export const Heading = styled.h1`
 export const MainHomeConatiner = styled.div`
   display: flex;
   margin: 8px 24px;
+  @media (max-width: 998px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const CalenderConatiner = styled.div`
@@ -20,6 +24,7 @@ export const CalenderConatiner = styled.div`
   align-items: center;
   padding: 10px;
   border-radius: 3px;
+  margin-bottom: 8px;
 `;
 
 export const CalenderHeading = styled.div`
@@ -55,6 +60,11 @@ export const SmallEmoji = styled.img`
 export const ChildContainer = styled.div`
   width: 30%;
   margin-left: 50px;
+  @media (max-width: 998px) {
+    width: 60%;
+    align-content: center;
+    margin-left: 0px;
+  }
 `;
 
 export const EmojiConatiner = styled.div`
@@ -75,6 +85,7 @@ export const EmojiCard = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 `;
 
 export const LargeEmoji = styled.img`
