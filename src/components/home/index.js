@@ -15,6 +15,8 @@ import {
   EmojiCard,
   SelectDiv,
   H1,
+  EmojiSelect,
+  DaySelect,
 } from "./styles";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
@@ -40,7 +42,7 @@ class Home extends Component {
       activeEmoji: "380e6284-a454-11ec-b909-0242ac120002",
       activeDate: "",
       activeFilterEmoji: "Very Happy",
-      activeFilterDay: "Sun",
+      activeFilterMonth: "Sun",
       initialMonthsList: props.initialMonthsList,
       count: 0,
     };
@@ -53,7 +55,7 @@ class Home extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.activeFilterEmoji !== this.state.activeFilterEmoji ||
-      prevState.activeFilterDay !== this.state.activeFilterDay ||
+      prevState.activeFilterMonth !== this.state.activeFilterMonth ||
       prevState.initialMonthsList !== this.state.initialMonthsList
     ) {
       this.showCount();
@@ -100,6 +102,7 @@ class Home extends Component {
     selectedDate.emojiName = emojiObj.emojiName;
 
     this.setState({ activeDate: day.date });
+    this.showCount();
     updateCount(initialMonthsList);
   };
 
@@ -167,15 +170,19 @@ class Home extends Component {
   };
 
   showCount = () => {
-    const { activeFilterEmoji, activeFilterDay, initialMonthsList } =
+    const { activeFilterEmoji, activeFilterMonth, initialMonthsList } =
       this.state;
-    const { daysList } = this.props;
 
-    const filterbyMood = initialMonthsList.flatMap((eachMonth) =>
+    const filterByMonth = initialMonthsList.filter(
+      (eachMonth) => eachMonth.monthName === activeFilterMonth
+    );
+
+    const filterbyMood = filterByMonth.flatMap((eachMonth) =>
       eachMonth.dates.filter(
         (eachDate) => eachDate.emojiName === activeFilterEmoji
       )
     );
+
     this.setState({ count: filterbyMood.length });
   };
 
@@ -187,29 +194,31 @@ class Home extends Component {
     this.setState({ activeFilterEmoji: emoji[0].emojiName });
   };
 
-  handleDayChange = (e) => {
-    const { daysList } = this.props;
-    const day = daysList.filter((day) => day.day === e.target.value);
-    this.setState({ activeFilterDay: day[0].day });
+  handleMonthsChange = (e) => {
+    const { initialMonthsList } = this.state;
+    const month = initialMonthsList.filter(
+      (month) => month.monthName === e.target.value
+    );
+    this.setState({ activeFilterMonth: month[0].monthName });
   };
 
   getDropDowns = () => {
-    const { emojisList, daysList } = this.props;
-    const { count } = this.state;
+    const { emojisList } = this.props;
+    const { count, initialMonthsList } = this.state;
     return (
       <DayConatiner>
         <SelectDiv>
-          <select onChange={this.handleActiveEmoji}>
+          <EmojiSelect onChange={this.handleActiveEmoji}>
             {emojisList.map((emoji) => (
               <option value={emoji.emojiName}>{emoji.emojiName}</option>
             ))}
-          </select>
+          </EmojiSelect>
 
-          <select onChange={this.handleDayChange}>
-            {daysList.map((day) => (
-              <option value={day.day}>{day.day}</option>
+          <DaySelect onChange={this.handleMonthsChange}>
+            {initialMonthsList.map((month) => (
+              <option value={month.monthName}>{month.monthName}</option>
             ))}
-          </select>
+          </DaySelect>
         </SelectDiv>
         <H1>{count < 10 ? `0${count}` : count}</H1>
       </DayConatiner>

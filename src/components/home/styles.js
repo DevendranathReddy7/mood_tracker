@@ -25,6 +25,9 @@ export const CalenderConatiner = styled.div`
   padding: 10px;
   border-radius: 3px;
   margin-bottom: 8px;
+  @media (max-width: 448px) {
+    width: 100%;
+  }
 `;
 
 export const CalenderHeading = styled.div`
@@ -38,6 +41,10 @@ export const CalenderBody = styled.div`
   grid-template-columns: repeat(7, 1fr);
   padding: 8px 0px 0px 20px;
   gap: 10px;
+  @media (max-width: 448px) {
+    padding: 8px 0px 0px 8px;
+    gap: 3px;
+  }
 `;
 
 export const Li = styled.li`
@@ -64,6 +71,9 @@ export const ChildContainer = styled.div`
     width: 60%;
     align-content: center;
     margin-left: 0px;
+  }
+  @media (max-width: 448px) {
+    width: 100%;
   }
 `;
 
@@ -109,8 +119,29 @@ export const DayConatiner = styled.div`
 export const SelectDiv = styled.div`
   display: flex;
   justify-content: space-around;
+  @media (max-width: 448px) {
+    display: block;
+  }
 `;
 
 export const H1 = styled.h1`
   text-align: center;
+`;
+
+export const EmojiSelect = styled.select`
+  padding: 5px;
+  @media (max-width: 448px) {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+`;
+
+export const DaySelect = styled.select`
+  padding: 5px;
+  @media (max-width: 448px) {
+    padding: 10px;
+
+    width: 100%;
+  }
 `;

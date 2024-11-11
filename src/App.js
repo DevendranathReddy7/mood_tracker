@@ -2352,7 +2352,7 @@ const emojisList = [
 // #endregion
 
 function App() {
-  const [updatedMonths, setUpdatedMonths] = useState();
+  const [updatedMonths, setUpdatedMonths] = useState(initialMonthsList);
 
   const countHandler = (monthslist) => {
     setUpdatedMonths(monthslist);
